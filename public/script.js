@@ -1,3 +1,51 @@
+// ===== Sales Banner =====
+const salesBanner = document.getElementById('salesBanner');
+const inquiryBtn = document.getElementById('inquiryBtn');
+const closeBanner = document.getElementById('closeBanner');
+const popupOverlay = document.getElementById('popupOverlay');
+const popupClose = document.getElementById('popupClose');
+
+// Show banner class on body
+document.body.classList.add('has-banner');
+
+// Close banner
+closeBanner.addEventListener('click', () => {
+  salesBanner.classList.add('sales-banner--hidden');
+  document.body.classList.remove('has-banner');
+});
+
+// Send inquiry
+inquiryBtn.addEventListener('click', async () => {
+  inquiryBtn.disabled = true;
+  inquiryBtn.textContent = 'Wird gesendet...';
+
+  try {
+    const res = await fetch('/api/send', { method: 'POST' });
+    if (res.ok) {
+      popupOverlay.classList.add('popup-overlay--visible');
+    } else {
+      inquiryBtn.textContent = 'Fehler – nochmal versuchen';
+      inquiryBtn.disabled = false;
+    }
+  } catch {
+    inquiryBtn.textContent = 'Fehler – nochmal versuchen';
+    inquiryBtn.disabled = false;
+  }
+});
+
+// Close popup
+popupClose.addEventListener('click', () => {
+  popupOverlay.classList.remove('popup-overlay--visible');
+  inquiryBtn.textContent = 'Anfrage gesendet';
+});
+
+popupOverlay.addEventListener('click', (e) => {
+  if (e.target === popupOverlay) {
+    popupOverlay.classList.remove('popup-overlay--visible');
+    inquiryBtn.textContent = 'Anfrage gesendet';
+  }
+});
+
 // ===== Header scroll effect =====
 const header = document.getElementById('header');
 

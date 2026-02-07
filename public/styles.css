@@ -770,6 +770,194 @@ h1, h2, h3, h4 {
   font-weight: 500;
 }
 
+/* ===== Sales Banner ===== */
+.sales-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  background: linear-gradient(135deg, #e8b830, #f5d020, #e8b830);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+  animation: bannerPulse 3s ease-in-out infinite;
+}
+
+@keyframes bannerPulse {
+  0%, 100% { background: linear-gradient(135deg, #e8b830, #f5d020, #e8b830); }
+  50% { background: linear-gradient(135deg, #f5d020, #ffdf40, #f5d020); }
+}
+
+.sales-banner__content {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sales-banner__text {
+  font-family: var(--ff-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.sales-banner__btn {
+  background: #1a1a1a;
+  color: #f5d020;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-family: var(--ff-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sales-banner__btn:hover {
+  background: #000;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.sales-banner__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sales-banner__close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.sales-banner__close:hover {
+  opacity: 1;
+}
+
+.sales-banner--hidden {
+  display: none;
+}
+
+body.has-banner .header {
+  top: 48px;
+}
+
+body.has-banner .hero {
+  padding-top: 48px;
+}
+
+/* ===== Popup ===== */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-overlay--visible {
+  display: flex;
+}
+
+.popup {
+  background: #1a1a1a;
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  animation: popupIn 0.3s ease;
+}
+
+@keyframes popupIn {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.popup__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+.popup__title {
+  font-size: 1.3rem;
+  color: var(--clr-white);
+  margin-bottom: 0.5rem;
+}
+
+.popup__text {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.popup__btn {
+  background: linear-gradient(135deg, var(--clr-gold), var(--clr-gold-dark));
+  color: #0a0a0a;
+  border: none;
+  padding: 0.7rem 2.5rem;
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popup__btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(201, 169, 110, 0.3);
+}
+
+@media (max-width: 768px) {
+  .sales-banner__text {
+    font-size: 0.8rem;
+  }
+  .sales-banner__btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+  .sales-banner__close {
+    right: 0.5rem;
+  }
+}
+
 /* ===== Scroll animations ===== */
 .reveal {
   opacity: 0;

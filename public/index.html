@@ -17,6 +17,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Sales Banner -->
+  <div class="sales-banner" id="salesBanner">
+    <div class="sales-banner__content">
+      <span class="sales-banner__text">Gefällt Ihnen diese Webseite? Sie können sie jetzt erwerben!</span>
+      <button class="sales-banner__btn" id="inquiryBtn">Jetzt Anfrage senden</button>
+    </div>
+    <button class="sales-banner__close" id="closeBanner" aria-label="Banner schliessen">&times;</button>
+  </div>
+
+  <!-- Success Popup -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <div class="popup__icon">&#10003;</div>
+      <h3 class="popup__title">Anfrage gesendet!</h3>
+      <p class="popup__text">Vielen Dank für Ihr Interesse. Wir melden uns in Kürze bei Ihnen.</p>
+      <button class="popup__btn" id="popupClose">OK</button>
+    </div>
+  </div>
+
   <!-- Navigation -->
   <header class="header" id="header">
     <nav class="nav container">
