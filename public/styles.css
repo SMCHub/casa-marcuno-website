@@ -945,6 +945,61 @@ body.has-banner .hero {
   box-shadow: 0 4px 15px rgba(201, 169, 110, 0.3);
 }
 
+.popup--hidden {
+  display: none;
+}
+
+.popup__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--clr-text-dim);
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.popup__close:hover {
+  color: var(--clr-white);
+}
+
+.popup__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.popup__form input {
+  font-family: var(--ff-body);
+  font-size: 0.9rem;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.popup__form input::placeholder {
+  color: var(--clr-text-dim);
+}
+
+.popup__form input:focus {
+  border-color: var(--clr-gold);
+}
+
+.popup__btn--send {
+  margin-top: 0.25rem;
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .sales-banner__text {
     font-size: 0.8rem;

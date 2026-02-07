@@ -14,26 +14,58 @@ closeBanner.addEventListener('click', () => {
   document.body.classList.remove('has-banner');
 });
 
-// Send inquiry
-inquiryBtn.addEventListener('click', async () => {
-  inquiryBtn.disabled = true;
-  inquiryBtn.textContent = 'Wird gesendet...';
+const popupForm = document.getElementById('popupForm');
+const popupSuccess = document.getElementById('popupSuccess');
+const popupFormClose = document.getElementById('popupFormClose');
+const inquiryForm = document.getElementById('inquiryForm');
+const sendInquiry = document.getElementById('sendInquiry');
+
+// Open contact form popup
+inquiryBtn.addEventListener('click', () => {
+  popupForm.classList.remove('popup--hidden');
+  popupSuccess.classList.add('popup--hidden');
+  popupOverlay.classList.add('popup-overlay--visible');
+});
+
+// Close form popup
+popupFormClose.addEventListener('click', () => {
+  popupOverlay.classList.remove('popup-overlay--visible');
+});
+
+// Submit inquiry form
+inquiryForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('inqName').value.trim();
+  const phone = document.getElementById('inqPhone').value.trim();
+  const email = document.getElementById('inqEmail').value.trim();
+
+  if (!name || !email) return;
+
+  sendInquiry.disabled = true;
+  sendInquiry.textContent = 'Wird gesendet...';
 
   try {
-    const res = await fetch('/api/send', { method: 'POST' });
+    const res = await fetch('/api/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email })
+    });
     if (res.ok) {
-      popupOverlay.classList.add('popup-overlay--visible');
+      popupForm.classList.add('popup--hidden');
+      popupSuccess.classList.remove('popup--hidden');
+      inquiryForm.reset();
     } else {
-      inquiryBtn.textContent = 'Fehler – nochmal versuchen';
-      inquiryBtn.disabled = false;
+      sendInquiry.textContent = 'Fehler – nochmal versuchen';
     }
   } catch {
-    inquiryBtn.textContent = 'Fehler – nochmal versuchen';
-    inquiryBtn.disabled = false;
+    sendInquiry.textContent = 'Fehler – nochmal versuchen';
+  } finally {
+    sendInquiry.disabled = false;
+    sendInquiry.textContent = 'Anfrage senden';
   }
 });
 
-// Close popup
+// Close success popup
 popupClose.addEventListener('click', () => {
   popupOverlay.classList.remove('popup-overlay--visible');
   inquiryBtn.textContent = 'Anfrage gesendet';
@@ -42,7 +74,6 @@ popupClose.addEventListener('click', () => {
 popupOverlay.addEventListener('click', (e) => {
   if (e.target === popupOverlay) {
     popupOverlay.classList.remove('popup-overlay--visible');
-    inquiryBtn.textContent = 'Anfrage gesendet';
   }
 });
 
